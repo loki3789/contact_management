@@ -8,10 +8,19 @@
 require realpath($_SERVER["DOCUMENT_ROOT"]) . '\vendor\autoload.php';
 
 class contactsController {
-        
-        public function processRequest() {
-            echo 'hi';
-                
+       public function processRequest() {
+               if (isset($_POST)) {
+	               if(isset($_POST['add'])) {
+                               $this->addContact($_POST);
+		       }
+                    
+		       if(isset($_POST['modify'])) {
+                               $this->modifyContact($_POST);
+                       }
+                       if(isset($_POST['delete'])) {
+                               $this->deleteContact($_POST['id']);
+                       }
+	        }
         }
         public function modifyContact($post) {
                 $databaseObject = new Database;
