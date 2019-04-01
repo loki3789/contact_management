@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
         <link rel="stylesheet" type="text/css" href="public/assets/css/font-awesome.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Contacts Manager</title>
     </head>
@@ -34,29 +35,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <form action="public/contactsController/processRequest" method="POST">
-                                                <table class="d-flex justify-content-center">
-                                                    <tr>
-                                                        <td><label>Name : </label></td>
-                                                        <td class="form-group"><input class='form-control' name="name" type="text"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label>E-mail : </label></td>
-                                                        <td class="form-group"><input class='form-control' name="email" type="text"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label>Phone Number : </label></td>
-                                                        <td class="form-group"><input class='form-control' name="phonenumber" type="text"></td>
-                                                    </tr>	
-                                                    <tr>
-                                                        <td><label>Birthdate : </label></td>
-                                                        <td class="form-group"><input class='form-control' name="birthdate" type="text"></td>
-                                                    </tr>
-                                                    			
-                                                </table>
-                                                <br>
-                                                <input class='btn btn-primary' type="submit" name="add" value="Add">
-                                            </form>
+                                            
+                                                <div id="app">
+		                                <component :is='componentName' @change="change"></component>
+	                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,6 +51,39 @@
                 </div>
             </nav>
         </header>
+        <template id="signUpForm">
+		<div class="modal-body text-center">
+			<div class="panel panel-primary" id="formdiv">
+				
+				<div class="panel-body">
+					<form action="public/contactsController/processRequest" method="POST" @submit.prevent='submit'>
+                                                <div class="form-group">
+							<label for="exampleInputName">Name</label>
+							<input type="text" placeholder="Name" name="name" class="form-control" v-model='name'>
+							<span v-if='msg.name'>{{msg.name }}</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email address</label>
+							<input type="text" placeholder="Email" name="email" class="form-control" v-model='email'>
+							<span v-if='msg.email'>{{msg.email}}</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Phone Number</label>
+							<input type="number" placeholder="PhoneNumber" name="phoneNumber" class="form-control" v-model='phoneNumber'>
+							<span v-if='msg.PhoneNumber'>{{msg.PhoneNumber}}</span>
+						</div>			
+						<div class="form-group">
+							<label for="exampleInputEmail1">Birth Date</label>
+							<input type="date" placeholder="Birth Date" name="birthdate" class="form-control" v-model='birthdate'>
+							<span v-if='msg.Birthdate'>{{msg.birthdate}}</span>
+						</div>
+						<input type="submit" value="Add" :disabled='disableSubmitButton' class="btn btn-warning">
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</template>
 
 
         <!-- Page Content -->
@@ -207,7 +222,8 @@
             </footer>
         </div>
         <!-- /.container -->
-
+        
+        <script type="text/javascript" src="assets/js/vueScript.js"></script>
         <script type="text/javascript" src="public/assets/js/jquery.js"></script>
         <script type="text/javascript" src="public/assets/js/popper.js"></script>
         <script type="text/javascript" src="public/assets/js/bootstrap.min.js"></script>
