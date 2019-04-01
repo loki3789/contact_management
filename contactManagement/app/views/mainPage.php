@@ -223,7 +223,7 @@
         </div>
         <!-- /.container -->
         
-        <script type="text/javascript" src="assets/js/vueScript.js"></script>
+        <script type="text/javascript" src="public/assets/js/vueScript.js"></script>
         <script type="text/javascript" src="public/assets/js/jquery.js"></script>
         <script type="text/javascript" src="public/assets/js/popper.js"></script>
         <script type="text/javascript" src="public/assets/js/bootstrap.min.js"></script>
